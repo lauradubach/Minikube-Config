@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\laura\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f compose.prod.yaml
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: msvc-bp-prod-api
+  name: msvc-bp-prod-api
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 5000
+  selector:
+    io.kompose.service: msvc-bp-prod-api
