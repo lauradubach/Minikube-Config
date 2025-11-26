@@ -9,7 +9,3 @@ resources:
   - msvc-bp-prod-db-service.yaml
   - msvc-prod-db-persistentvolumeclaim.yaml
   - msvc-bp-prod-api-ingress.yaml
-
-images:
-  - name: ghcr.io/lauradubach/musiceventfinder
-    newTag: REPLACE_ME
