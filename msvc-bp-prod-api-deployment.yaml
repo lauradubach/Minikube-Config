@@ -25,7 +25,10 @@ spec:
             - name: DATABASE_URI
               value: mysql+mysqlconnector://root:root@msvc-bp-prod-db:3306/msvc-prod
             - name: TICKETMASTER_API_KEY
-              value: o7IfhKGwIZjYxD9MQPbHvXf1JcLPn647
+              valueFrom:
+                secretKeyRef:
+                  name: ticketmaster-secret   
+                  key: TICKETMASTER_API_KEY
           envFrom:
             - configMapRef:
                 name: env
