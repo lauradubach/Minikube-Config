@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "musiceventfinder.fullname" . }}-db
+  labels:
+    {{- include "musiceventfinder.db.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "musiceventfinder.db.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "musiceventfinder.db.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: mysql
+          image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
+          imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+          ports:
+            - name: mysql
+              containerPort: {{ .Values.database.service.port }}
+              protocol: TCP
+          env:
+            - name: MYSQL_DATABASE
+              value: {{ .Values.database.env.database | quote }}
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.database.env.rootPassword | quote }}
+          livenessProbe:
+            tcpSocket:
+              port: mysql
+            initialDelaySeconds: {{ .Values.database.probes.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.database.probes.liveness.periodSeconds }}
+            timeoutSeconds: {{ .Values.database.probes.liveness.timeoutSeconds }}
+            failureThreshold: {{ .Values.database.probes.liveness.failureThreshold }}
+          readinessProbe:
+            tcpSocket:
+              port: mysql
+            initialDelaySeconds: {{ .Values.database.probes.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.database.probes.readiness.periodSeconds }}
+          {{- if .Values.database.persistence.enabled }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+          {{- end }}
+      restartPolicy: Always
+      {{- if .Values.database.persistence.enabled }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "musiceventfinder.fullname" . }}-db
+      {{- end }}

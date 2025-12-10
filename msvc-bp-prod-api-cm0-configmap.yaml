@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  DB_ROOT_PASSWORD: root
-kind: ConfigMap
-metadata:
-  labels:
-    io.kompose.service: msvc-bp-prod-api-env
-  name: env

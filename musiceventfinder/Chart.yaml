@@ -1,0 +1,12 @@
+apiVersion: v2
+name: musiceventfinder
+description: A Helm chart for Music Event Finder application
+type: application
+version: 0.1.0
+appVersion: "1.0"
+keywords:
+  - music
+  - events
+  - ticketmaster
+maintainers:
+  - name: Laura Dubach

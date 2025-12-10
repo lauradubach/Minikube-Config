@@ -1,2 +1,7 @@
 ghcr-secret.yaml
 ticketmaster-secret.yaml
+
+# Helm secrets
+values-secrets.yaml
+*-secrets.yaml
+secrets.yaml

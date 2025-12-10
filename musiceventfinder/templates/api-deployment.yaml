@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "musiceventfinder.fullname" . }}-api
+  labels:
+    {{- include "musiceventfinder.api.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "musiceventfinder.api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "musiceventfinder.api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.api.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: api
+          image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
+          imagePullPolicy: {{ .Values.api.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.api.service.targetPort }}
+              protocol: TCP
+          env:
+            - name: DATABASE_URI
+              value: {{ .Values.api.env.databaseUri | quote }}
+            - name: TICKETMASTER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.api.secrets.ticketmaster.name }}
+                  key: {{ .Values.api.secrets.ticketmaster.key }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "musiceventfinder.fullname" . }}-env
+      restartPolicy: Always
