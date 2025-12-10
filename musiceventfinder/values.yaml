@@ -17,7 +17,7 @@ api:
   
   env:
     dbRootPassword: root
-    databaseUri: mysql+mysqlconnector://root:root@msvc-bp-prod-db:3306/msvc-prod
+    databaseUri: mysql+mysqlconnector://root:root@msvc-bp-prod-db:3306/msvc-bp-prod-db
   
   secrets:
     ticketmaster:
