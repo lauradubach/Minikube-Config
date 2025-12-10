@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace | default "musicevents" }}
   labels:
     {{- include "musiceventfinder.labels" . | nindent 4 }}
-    app.kubernetes.io/component: db
+    app.kubernetes.io/component: database
 spec:
   type: ClusterIP
   ports:
