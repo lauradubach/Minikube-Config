@@ -1,15 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "musiceventfinder.fullname" . }}-db
+  name: msvc-bp-prod-db
+  namespace: {{ .Values.namespace | default "musicevents" }}
   labels:
-    {{- include "musiceventfinder.db.labels" . | nindent 4 }}
+    {{- include "musiceventfinder.labels" . | nindent 4 }}
+    app.kubernetes.io/component: db
 spec:
-  type: {{ .Values.database.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.database.service.port }}
-      targetPort: {{ .Values.database.service.port }}
-      protocol: TCP
-      name: mysql
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+    name: mysql
   selector:
-    {{- include "musiceventfinder.db.selectorLabels" . | nindent 4 }}
+    {{- include "musiceventfinder.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: db
