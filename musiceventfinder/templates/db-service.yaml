@@ -15,4 +15,6 @@ spec:
     name: mysql
   selector:
     {{- include "musiceventfinder.selectorLabels" . | nindent 4 }}
-    app.kubernetes.io/component: db
+    app.kubernetes.io/name: musiceventfinder    
+    app.kubernetes.io/component: database    
+    app.kubernetes.io/instance: musiceventfinder
