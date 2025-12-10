@@ -25,7 +25,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/lauradubach/Minikube-Config.git'
-    path: 'musiceventfinder'  # Pfad zu deinem Helm Chart
+    path: 'musiceventfinder'  # Pfad zu deinem Helm Chart  
     targetRevision: HEAD
     helm:
       valueFiles:
