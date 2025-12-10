@@ -35,7 +35,7 @@ database:
     port: 3306
   
   env:
-    database: msvc-bp-prod-db
+    database: msvc-prod
     rootPassword: root
   
   persistence:
