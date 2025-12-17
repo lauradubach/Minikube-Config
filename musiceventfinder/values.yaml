@@ -60,7 +60,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - host: ""
+    - host: "musiceventfinder.local"
       paths:
         - path: /
           pathType: Prefix
@@ -71,19 +71,4 @@ fullnameOverride: ""
 
 # Secrets configuration
 secrets:
-  # Set to true to create secrets from values (NOT recommended for production)
-  # Set to false if secrets are managed externally
   create: false
-  
-  # GHCR Docker Registry Secret
-  # Only used if secrets.create is true
-  ghcr:
-    # Base64 encoded .dockerconfigjson
-    # Generate with: kubectl create secret docker-registry ghcr-secret --docker-server=ghcr.io --docker-username=USERNAME --docker-password=TOKEN --dry-run=client -o jsonpath='{.data.\.dockerconfigjson}'
-    dockerconfigjson: "eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoibGF1cmFkdWJhY2giLCJwYXNzd29yZCI6ImdocF9rbmh4OXpqWFZUcE5scTBzZXRBNmRRS25MWEpDRmkxZXcxSkQiLCJlbWFpbCI6ImxhdXJhLmR1YmFjaEBlZHUudGJ6LmNoIiwiYXV0aCI6ImJHRjFjbUZrZFdKaFkyZzZaMmh3WDJ0dWFIZzVlbXBZVmxSd1RteHhNSE5sZEVFMlpGRkxia3hZU2tOR2FURmxkekZLUkE9PSJ9fX0="
-  
-  # Ticketmaster API Secret
-  # Only used if secrets.create is true
-  ticketmaster:
-    # Plain text API key (will be base64 encoded automatically)
-    apiKey: "bzdJZmhLR3dJWmpZeEQ5TVFQYkh2WGYxSmNMUG42NDcK"
