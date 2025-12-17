@@ -1,4 +1,3 @@
 ticketmaster-secret.yaml
 ghcr-secret.yaml
-setup-minikube-docker.sh
 .env
