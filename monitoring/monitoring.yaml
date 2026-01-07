@@ -103,13 +103,13 @@ spec:
               cert-manager.io/cluster-issuer: letsencrypt-prod
               # nginx.ingress.kubernetes.io/ssl-redirect: "true"
             hosts:
-              - grafana.your-domain.com
+              - grafana.localhost
             path: /
             pathType: Prefix
             tls:
               - secretName: grafana-tls
                 hosts:
-                  - grafana.your-domain.com
+                  - grafana.localhost
           
           # Standard Dashboards
           defaultDashboardsEnabled: true
@@ -152,14 +152,14 @@ spec:
               # nginx.ingress.kubernetes.io/auth-secret: alertmanager-basic-auth
               # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
             hosts:
-              - alertmanager.your-domain.com
+              - alertmanager.localhost
             paths:
               - /
             pathType: Prefix
             tls:
               - secretName: alertmanager-tls
                 hosts:
-                  - alertmanager.your-domain.com
+                  - alertmanager.localhost
           
           config:
             global:
