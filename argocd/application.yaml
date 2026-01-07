@@ -1,33 +1,3 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: musiceventfinder
-#   namespace: argocd
-# spec:
-#   project: default
-#   source:
-#     repoURL: 'https://github.com/lauradubach/Minikube-Config.git'
-#     path: 'musiceventfinder'  # Pfad zu deinem Helm Chart  
-#     targetRevision: HEAD
-#     helm:
-#       valueFiles:
-#         - values.yaml
-#       # Optional: Werte überschreiben
-#       # values: |
-#       #   replicaCount: 2
-#       #   api:
-#       #     image:
-#       #       tag: "v1.2.3"
-#   destination:
-#     server: 'https://kubernetes.default.svc'
-#     namespace: musicevents
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
